@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="chat_bot_graph">
+    <serverData>
+      <paths name="chat_bot_graph">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/chat_bot_graph" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
