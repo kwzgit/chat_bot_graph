@@ -32,5 +32,5 @@ if __name__ == '__main__':
     while 1:
         question = input('用户:')
         answer = handler.chat_main(question)
-        print('小智:', answer)
+        print('小智 :', answer)
 
