@@ -100,7 +100,7 @@ class QuestionPaser:
         sql = []
         # 查询疾病的原因
         if question_type == 'disease_cause':
-            sql = ["MATCH (m:Disease) where m.name = '{0}' return m.name, m.cause".format(i) for i in entities]
+            sql = ["MATCH (m:疾病)-[r:疾病相关发病原因]->(n) where m.name = '{0}' return m.name, n.name".format(i) for i in entities]
             print(sql)  #‘得了高血压的原因’--["MATCH (m:Disease) where m.name = '高血压' return m.name, m.cause"]
         # 查询疾病的防御措施
         elif question_type == 'disease_prevent':
@@ -109,11 +109,11 @@ class QuestionPaser:
 
         # 查询疾病的持续时间
         elif question_type == 'disease_lasttime':
-            sql = ["MATCH (m:Disease) where m.name = '{0}' return m.name, m.cure_lasttime".format(i) for i in entities]
+            sql = ["MATCH (m:疾病)-[r:疾病相关治疗周期]->(n) where m.name = '{0}' return m.name, n.name".format(i) for i in entities]
 
         # 查询疾病的治愈概率
         elif question_type == 'disease_cureprob':
-            sql = ["MATCH (m:Disease) where m.name = '{0}' return m.name, m.cured_prob".format(i) for i in entities]
+            sql = ["MATCH (m:疾病)-[r:疾病相关治愈率]->(n) where m.name = '{0}' return m.name, n.name".format(i) for i in entities]
 
         # 查询疾病的治疗方式
         elif question_type == 'disease_cureway':
@@ -121,7 +121,7 @@ class QuestionPaser:
 
         # 查询疾病的易发人群
         elif question_type == 'disease_easyget':
-            sql = ["MATCH (m:Disease) where m.name = '{0}' return m.name, m.easy_get".format(i) for i in entities]
+            sql = ["MATCH (m:疾病)-[r:疾病相关多发人群]->(n) where m.name = '{0}' return m.name, n.name".format(i) for i in entities]
 
         # 查询疾病的相关介绍
         elif question_type == 'disease_desc':
@@ -129,17 +129,18 @@ class QuestionPaser:
 
         # 查询疾病有哪些症状
         elif question_type == 'disease_symptom':
-            sql = ["MATCH (m:Disease)-[r:has_symptom]->(n:Symptom) where m.name = '{0}' return m.name, r.name, n.name".format(i) for i in entities]
+            sql = ["MATCH (m:疾病)-[r:疾病相关症状]->(n) where m.name = '{0}' return m.name, r.name, n.name".format(i) for i in entities]
 
         # 查询症状会导致哪些疾病
         elif question_type == 'symptom_disease':
-            sql = ["MATCH (m:Disease)-[r:has_symptom]->(n:Symptom) where n.name = '{0}' return m.name, r.name, n.name".format(i) for i in entities]
+            sql = ["MATCH (m:疾病)-[r:疾病相关症状]->(n) where n.name = '{0}' return m.name, r.name, n.name".format(i) for i in entities]
 
         # 查询疾病的并发症
         elif question_type == 'disease_acompany':
-            sql1 = ["MATCH (m:Disease)-[r:acompany_with]->(n:Disease) where m.name = '{0}' return m.name, r.name, n.name".format(i) for i in entities]
-            sql2 = ["MATCH (m:Disease)-[r:acompany_with]->(n:Disease) where n.name = '{0}' return m.name, r.name, n.name".format(i) for i in entities]
-            sql = sql1 + sql2
+            # sql1 = ["MATCH (m:Disease)-[r:acompany_with]->(n:Disease) where m.name = '{0}' return m.name, r.name, n.name".format(i) for i in entities]
+            # sql2 = ["MATCH (m:Disease)-[r:acompany_with]->(n:Disease) where n.name = '{0}' return m.name, r.name, n.name".format(i) for i in entities]
+            sql = ["MATCH (m:疾病)-[r:疾病相关并发症]->(n) where m.name = '{0}' return m.name, r.name, n.name".format(i) for i in entities]
+            # sql = sql1 + sql2
         # 查询疾病的忌口
         elif question_type == 'disease_not_food':
             sql = ["MATCH (m:Disease)-[r:no_eat]->(n:Food) where m.name = '{0}' return m.name, r.name, n.name".format(i) for i in entities]

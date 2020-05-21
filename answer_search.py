@@ -46,7 +46,7 @@ class AnswerSearcher:
             final_answer = '症状{0}可能染上的疾病有：{1}'.format(subject, '；'.join(list(set(desc))[:self.num_limit]))
 
         elif question_type == 'disease_cause':
-            desc = [i['m.cause'] for i in answers]
+            desc = [i['n.name'] for i in answers]
             subject = answers[0]['m.name']
             final_answer = '{0}可能的成因有：{1}'.format(subject, '；'.join(list(set(desc))[:self.num_limit]))
 
@@ -56,7 +56,7 @@ class AnswerSearcher:
             final_answer = '{0}的预防措施包括：{1}'.format(subject, '；'.join(list(set(desc))[:self.num_limit]))
 
         elif question_type == 'disease_lasttime':
-            desc = [i['m.cure_lasttime'] for i in answers]
+            desc = [i['n.name'] for i in answers]
             subject = answers[0]['m.name']
             final_answer = '{0}治疗可能持续的周期为：{1}'.format(subject, '；'.join(list(set(desc))[:self.num_limit]))
 
@@ -66,12 +66,12 @@ class AnswerSearcher:
             final_answer = '{0}可以尝试如下治疗：{1}'.format(subject, '；'.join(list(set(desc))[:self.num_limit]))
 
         elif question_type == 'disease_cureprob':
-            desc = [i['m.cured_prob'] for i in answers]
+            desc = [i['n.name'] for i in answers]
             subject = answers[0]['m.name']
             final_answer = '{0}治愈的概率为（仅供参考）：{1}'.format(subject, '；'.join(list(set(desc))[:self.num_limit]))
 
         elif question_type == 'disease_easyget':
-            desc = [i['m.easy_get'] for i in answers]
+            desc = [i['n.name'] for i in answers]
             subject = answers[0]['m.name']
 
             final_answer = '{0}的易感人群包括：{1}'.format(subject, '；'.join(list(set(desc))[:self.num_limit]))
@@ -86,7 +86,7 @@ class AnswerSearcher:
             desc2 = [i['m.name'] for i in answers]
             subject = answers[0]['m.name']
             desc = [i for i in desc1 + desc2 if i != subject]
-            final_answer = '{0}的症状包括：{1}'.format(subject, '；'.join(list(set(desc))[:self.num_limit]))
+            final_answer = '{0}的并发症包括：{1}'.format(subject, '；'.join(list(set(desc))[:self.num_limit]))
 
         elif question_type == 'disease_not_food':
             desc = [i['n.name'] for i in answers]
