@@ -7,7 +7,7 @@ PROJECT_PATH = os.path.dirname(os.path.realpath(__file__))
 DICT_PATH = os.path.join(PROJECT_PATH, 'dict')
 DATA_PATH = os.path.join(PROJECT_PATH, 'data')
 
-IP = '192.168.3.180'
+IP = '192.168.3.150'
 PORT = '9999'
 
 GRAPH_URL = 'http://192.168.3.150:7474'
